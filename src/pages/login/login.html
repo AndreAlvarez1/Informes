@@ -11,27 +11,43 @@
 <p>bienvenido</p>
 <img  src="">
 
-<ion-list>
+<ion-card>
+  <img src=""/>
+  <ion-card-content>
+    <ion-card-title>
+      Login
+      </ion-card-title>
 
-  <ion-item>
-    <ion-input type="text" [(ngModel)]="rut" placeholder="Rut Empresa"></ion-input>
-  </ion-item>
+      <ion-list>
 
-  <button ion-button color="light" (click)="validarRut()" >Validar</button>
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="rut" placeholder="Rut Empresa"></ion-input>
+        </ion-item>
+
+        <button ion-button color="light" (click)="validarRut(rut)" >Validar</button>
 
 
-  <ion-item *ngIf = "rutOk">
-    <ion-input type="text" [(ngModel)]="mail" placeholder="Correo"></ion-input>
-  </ion-item>
+        <ion-item *ngIf = "rutOk">
+          <ion-input type="text" [(ngModel)]="mail" placeholder="Correo"></ion-input>
+        </ion-item>
 
-  <ion-item *ngIf = "rutOk">
-    <ion-input type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
-  </ion-item>
+        <ion-item *ngIf = "rutOk">
+          <ion-input type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
+        </ion-item>
 
-  <button ion-button color="light" (click)="validarRut()" >Volver</button>
-  <button ion-button color="light" (click)="validarRut()" >Entrar</button>
-  <a href="http://www.gour-net.cl">Olvidé mi contraseña</a>
+        <button *ngIf="rutOk" ion-button color="light" >Volver</button>
+        <button *ngIf="rutOk" ion-button color="light" >Entrar</button>
+        <div *ngIf="rutOk">
+          <a href="http://www.gour-net.cl">Olvidé mi contraseña</a>
+        </div>
+      </ion-list>
 
-</ion-list>
+  </ion-card-content>
+</ion-card>
+
+
+
+
+
 
 </ion-content>

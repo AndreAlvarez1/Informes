@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ConectorProvider} from '../../providers/conector/conector';
 
 /**
  * Generated class for the LoginPage page.
@@ -16,21 +17,37 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class LoginPage {
 
   public rut: string;
-  public rutOk: boolean = false;
+  public rutOk: boolean;
   public mail: string;
   public password :string;
+  public empresas :any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public conector: ConectorProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  validarRut(){
-    alert("soy un rut");
-    this.rutOk = true;
-    
+  ngOnInit(){
+    this.conector.traedatosGet("api/v1/ventasdiarias/empresas")
+    .subscribe(datos => {console.log(datos.Data);
+                         this.empresas = datos.Data;
+                        })
   }
+
+  validarRut(rut){
+    this.rutOk = false;
+    console.log(rut, this.rutOk);
+
+    this.empresas.forEach(function(element) {
+      if (element.Rut == rut){
+        console.log("lo encontré " + element.Rut);
+        this.rutOk = true;
+        }
+    });
+  }
+
+
 
 }
